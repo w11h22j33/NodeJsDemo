@@ -12,12 +12,10 @@ function start(route,handle) {
 		}else{
 			console.log("Request received from " + pathname);
 		
-			route(handle,pathname);
+			route(handle,pathname,response);
+			
 		}
 		
-		response.writeHead(200,{"Content-Type":"text/plain"});
-		response.write("Hello " + pathname);
-		response.end();
 	}
 	
 	http.createServer(onRequest).listen(8888);
