@@ -10,9 +10,19 @@ function start(route,handle) {
 		if("/favicon.ico" === pathname){
 			
 		}else{
+			
 			console.log("Request received from " + pathname);
-		
-			route(handle,pathname,response);
+			
+			request.setEncoding("utf8");
+			
+			request.addListener("data", function(postDataChunk) {
+			      postData += postDataChunk;
+			      console.log("Received POST data chunk '"+
+			      postDataChunk + "'.");
+			});
+			    request.addListener("end", function() {
+			      route(handle, pathname, response, postData);
+			});
 			
 		}
 		
