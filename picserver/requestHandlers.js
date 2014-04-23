@@ -46,31 +46,30 @@ function sleep(milliSeconds) {
 }
 
 function doRequest(){
-	
-	var options = {
-	  hostname: 'kyfw.12306.cn',
-	  port: 80,
-	  path: '/otn/resources/js/framework/station_name.js',
-	  method: 'POST'
-	};
 
-	var req = http.request(options, function(res) {
-	  console.log('STATUS: ' + res.statusCode);
-	  console.log('HEADERS: ' + JSON.stringify(res.headers));
-	  res.setEncoding('utf8');
-	  res.on('data', function (chunk) {
-	    console.log('BODY: ' + chunk);
-	  });
+	http.get({host: 'http://api.hostip.info/get_json.php'}, function(res) {
+		
+		
+	  // res.setEncoding('utf8');
+		
+		
+  	  var response = "";
+	  
+  	  res.on('data', function (chunk) {
+		  
+  		  console.log('event data ---> ');
+		  
+  		  response = response + chunk;
+		  
+  	  });
+	  
+  	  res.on('end',function(){
+	  	
+  		console.log('event end ---> ' + response);
+		
+  	  }); 
+	 
 	});
-
-	req.on('error', function(e) {
-	  console.log('problem with request: ' + e.message);
-	});
-
-	// write data to request body
-	req.write('data\n');
-	req.write('data\n');
-	req.end();
 	
 }
 

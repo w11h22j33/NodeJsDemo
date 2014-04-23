@@ -15,6 +15,8 @@ function start(route,handle) {
 			
 			request.setEncoding("utf8");
 			
+			var postData = "";
+			
 			request.addListener("data", function(postDataChunk) {
 			      postData += postDataChunk;
 			      console.log("Received POST data chunk '"+
